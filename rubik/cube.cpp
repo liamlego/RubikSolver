@@ -143,10 +143,35 @@ void multiFaceRotate(
 std::vector<std::vector<int>> &face1,
 std::vector<std::vector<int>> &face2,
 std::vector<std::vector<int>> &face3,
-std::vector<std::vector<int>> &face4) {
+std::vector<std::vector<int>> &face4, int place) {
 
-    
+    // Rotate corners
+    int t1 = face1[0][place];
+    int b1 = face1[2][place];
 
+    face1[0][place] = face2[0][place];
+    face1[2][place] = face2[2][place];
+
+    face2[0][place] = face3[0][place];
+    face2[2][place] = face3[2][place];
+
+    face3[0][place] = face4[0][place];
+    face3[2][place] = face4[2][place];
+
+    face4[0][place] = t1;
+    face4[2][place] = b1;
+
+    //Rotate Edges
+
+    int e1 = face1[1][place];
+
+    face1[1][place] = face2[1][place];
+
+    face2[1][place] = face3[1][place];
+
+    face3[1][place] = face4[1][place];
+
+    face4[1][place] = e1;
 
 }
 
@@ -171,20 +196,28 @@ void Cube::updateCube(ACTION action) {
 
         faceRotateRight(rightFace);
 
+        multiFaceRotate(frontFace, bottomFace, backFace, topFace, 2);
+
     }
     else if (action == RIGHT_DOWN) {
 
         faceRotateLeft(rightFace);
+
+        multiFaceRotate(frontFace, topFace, backFace, bottomFace, 2);
         
     }
     else if (action == LEFT_UP) {
 
         faceRotateLeft(leftFace);
+
+        multiFaceRotate(frontFace, bottomFace, backFace, topFace, 0);
         
     }
     else if (action == LEFT_DOWN) {
 
         faceRotateRight(leftFace);
+
+        multiFaceRotate(frontFace, topFace, backFace, bottomFace, 0);
         
     }
     else if (action == BOTTOM_RIGHT) {

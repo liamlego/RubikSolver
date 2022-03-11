@@ -55,6 +55,18 @@ void RubikPlayer::play() {
                 else if (event.key.code == sf::Keyboard::F) {
                     action = ACTION::BACK_RIGHT;
                 }
+                else if (event.key.code == sf::Keyboard::O) {
+                    action = ACTION::RIGHT_UP;
+                }
+                else if (event.key.code == sf::Keyboard::P) {
+                    action = ACTION::RIGHT_DOWN;
+                }
+                else if (event.key.code == sf::Keyboard::U) {
+                    action = ACTION::LEFT_UP;
+                }
+                else if (event.key.code == sf::Keyboard::I) {
+                    action = ACTION::LEFT_DOWN;
+                }
             }
         }
 
