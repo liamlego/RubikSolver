@@ -1,18 +1,19 @@
-#ifndef SOLVER_H
-#define SOLVER_H
+#ifndef RUBIKP_H
+#define RUBIKP_H
 
 #include "cube.h"
 #include "SFML/Graphics.hpp"
 
-class Solver {
+
+class RubikPlayer {
 
 public:
 
-    Solver();
-    ~Solver();
+    RubikPlayer();
+    ~RubikPlayer();
 
-    void solve();
     void display(sf::RenderWindow&);
+    void play();
 
 private:
 

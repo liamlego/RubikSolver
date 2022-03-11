@@ -85,6 +85,32 @@ void Cube::updateCube(ACTION action) {
 
     if (action == UP_RIGHT) {
 
+        std::vector<int> temp = rightFace[0];
+        rightFace[0] = frontFace[0];
+        frontFace[0] = leftFace[0];
+        leftFace[0] = backFace[0];
+        backFace[0] = temp;
+
+        int topLeftCorner = topFace[0][0];
+
+        int bottomLeftCorner = topFace[2][0];
+
+        int topRightCorner = topFace[0][2];
+
+        int bottomRightCorner = topFace[2][2];
+
+        int bottomEdge = topFace[2][1];
+
+        topFace[2][1] = topFace[1][0];
+        topFace[1][0] = topFace[0][1];
+        topFace[0][1] = topFace[1][2];
+        topFace[1][2] = bottomEdge;
+
+        topFace[0][0] = topRightCorner;
+        topFace[2][0] = topLeftCorner;
+        topFace[0][2] = bottomRightCorner;
+        topFace[2][2] = bottomLeftCorner;
+
     }
     else if (action == UP_LEFT) {
 

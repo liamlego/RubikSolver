@@ -1,3 +1,6 @@
+#ifndef CUBE_H
+#define CUBE_H
+
 #include <vector>
 #include "SFML/Graphics.hpp"
 
@@ -8,7 +11,7 @@ RIGHT_UP, RIGHT_DOWN,
 LEFT_UP, LEFT_DOWN,
 BOTTOM_RIGHT, BOTTOM_LEFT,
 FRONT_RIGHT, FRONT_LEFT,
-BACK_RIGHT, BACK_LEFT};
+BACK_RIGHT, BACK_LEFT, NOTHING};
 
 class Cube {
 
@@ -52,3 +55,4 @@ YELLOW: 5
 
 
 };
+#endif
