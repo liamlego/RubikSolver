@@ -139,20 +139,15 @@ void faceRotateLeft(std::vector<std::vector<int>> &face) {
         face[0][2] = topLeftCorner;
 }
 
-void multiFaceRotateRight(
+void multiFaceRotate(
 std::vector<std::vector<int>> &face1,
 std::vector<std::vector<int>> &face2,
 std::vector<std::vector<int>> &face3,
 std::vector<std::vector<int>> &face4) {
 
-}
-
-void multiFaceRotateLeft(
-std::vector<std::vector<int>> &face1,
-std::vector<std::vector<int>> &face2,
-std::vector<std::vector<int>> &face3,
-std::vector<std::vector<int>> &face4) {
     
+
+
 }
 
 
@@ -174,14 +169,22 @@ void Cube::updateCube(ACTION action) {
     }
     else if (action == RIGHT_UP) {
 
+        faceRotateRight(rightFace);
+
     }
     else if (action == RIGHT_DOWN) {
+
+        faceRotateLeft(rightFace);
         
     }
     else if (action == LEFT_UP) {
+
+        faceRotateLeft(leftFace);
         
     }
     else if (action == LEFT_DOWN) {
+
+        faceRotateRight(leftFace);
         
     }
     else if (action == BOTTOM_RIGHT) {
@@ -197,16 +200,30 @@ void Cube::updateCube(ACTION action) {
         
     }
     else if (action == FRONT_RIGHT) {
+
+        faceRotateRight(frontFace);
+
+        rotateTriplets(topFace, leftFace, bottomFace, rightFace, 2);
         
     }
     else if (action == FRONT_LEFT) {
+
+        faceRotateLeft(frontFace);
+
+        rotateTriplets(topFace, rightFace, bottomFace, leftFace, 2);
         
     }
     else if (action == BACK_RIGHT) {
         
+        faceRotateRight(backFace);
+
+        rotateTriplets(topFace, leftFace, bottomFace, rightFace, 0);
+
     }
     else if (action == BACK_LEFT) {
-        
+        faceRotateLeft(backFace);
+
+        rotateTriplets(topFace, rightFace, bottomFace, leftFace, 0);
     }
 
 
@@ -296,6 +313,7 @@ void drawSquare(sf::RenderWindow &window, float x, float y, int colorCode) {
 
     window.draw(square);
 }
+
 
 void drawFace(sf::RenderWindow &window, float startX, float startY, std::vector<std::vector<int>> &face) {
 

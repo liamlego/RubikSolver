@@ -43,6 +43,18 @@ void RubikPlayer::play() {
                 else if (event.key.code == sf::Keyboard::R) {
                     action = ACTION::BOTTOM_RIGHT;
                 }
+                else if (event.key.code == sf::Keyboard::A) {
+                    action = ACTION::FRONT_LEFT;
+                }
+                else if (event.key.code == sf::Keyboard::S) {
+                    action = ACTION::FRONT_RIGHT;
+                }
+                else if (event.key.code == sf::Keyboard::D) {
+                    action = ACTION::BACK_LEFT;
+                }
+                else if (event.key.code == sf::Keyboard::F) {
+                    action = ACTION::BACK_RIGHT;
+                }
             }
         }
 
