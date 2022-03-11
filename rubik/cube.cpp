@@ -80,39 +80,96 @@ void Cube::initGraphics() {
 
 }
 
+// Takes in faces from front to left FOR Right rotation
+// Takes in faces from front to right FOR Left rotation
+void rotateTriplets(
+std::vector<std::vector<int>> &face1,
+std::vector<std::vector<int>> &face2,
+std::vector<std::vector<int>> &face3,
+std::vector<std::vector<int>> &face4, int place) {
+
+    std::vector<int> temp = face1[place];
+    face1[place] = face2[place];
+    face2[place] = face3[place];
+    face3[place] = face4[place];
+    face4[place] = temp;
+}
+
+void faceRotateRight(std::vector<std::vector<int>> &face) {
+        int topLeftCorner = face[0][0];
+
+        int bottomLeftCorner = face[2][0];
+
+        int topRightCorner = face[0][2];
+
+        int bottomRightCorner = face[2][2];
+
+        int bottomEdge = face[2][1];
+
+        face[2][1] = face[1][0];
+        face[1][0] = face[0][1];
+        face[0][1] = face[1][2];
+        face[1][2] = bottomEdge;
+
+        face[0][0] = topRightCorner;
+        face[2][0] = topLeftCorner;
+        face[0][2] = bottomRightCorner;
+        face[2][2] = bottomLeftCorner;
+}
+
+void faceRotateLeft(std::vector<std::vector<int>> &face) {
+        int topLeftCorner = face[0][0];
+
+        int bottomLeftCorner = face[2][0];
+
+        int topRightCorner = face[0][2];
+
+        int bottomRightCorner = face[2][2];
+
+        int bottomEdge = face[2][1];
+
+        face[2][1] = face[1][2];
+        face[1][2] = face[0][1];
+        face[0][1] = face[1][0];
+        face[1][0] = bottomEdge;
+
+        face[0][0] = bottomLeftCorner;
+        face[2][0] = bottomRightCorner;
+        face[2][2] = topRightCorner;
+        face[0][2] = topLeftCorner;
+}
+
+void multiFaceRotateRight(
+std::vector<std::vector<int>> &face1,
+std::vector<std::vector<int>> &face2,
+std::vector<std::vector<int>> &face3,
+std::vector<std::vector<int>> &face4) {
+
+}
+
+void multiFaceRotateLeft(
+std::vector<std::vector<int>> &face1,
+std::vector<std::vector<int>> &face2,
+std::vector<std::vector<int>> &face3,
+std::vector<std::vector<int>> &face4) {
+    
+}
+
+
 void Cube::updateCube(ACTION action) {
 
 
     if (action == UP_RIGHT) {
 
-        std::vector<int> temp = rightFace[0];
-        rightFace[0] = frontFace[0];
-        frontFace[0] = leftFace[0];
-        leftFace[0] = backFace[0];
-        backFace[0] = temp;
+        rotateTriplets(frontFace, leftFace, backFace, rightFace, 0);
 
-        int topLeftCorner = topFace[0][0];
-
-        int bottomLeftCorner = topFace[2][0];
-
-        int topRightCorner = topFace[0][2];
-
-        int bottomRightCorner = topFace[2][2];
-
-        int bottomEdge = topFace[2][1];
-
-        topFace[2][1] = topFace[1][0];
-        topFace[1][0] = topFace[0][1];
-        topFace[0][1] = topFace[1][2];
-        topFace[1][2] = bottomEdge;
-
-        topFace[0][0] = topRightCorner;
-        topFace[2][0] = topLeftCorner;
-        topFace[0][2] = bottomRightCorner;
-        topFace[2][2] = bottomLeftCorner;
+        faceRotateRight(topFace);
 
     }
     else if (action == UP_LEFT) {
+        
+        rotateTriplets(frontFace, rightFace, backFace, leftFace, 0);
+        faceRotateLeft(topFace);
 
     }
     else if (action == RIGHT_UP) {
@@ -128,9 +185,15 @@ void Cube::updateCube(ACTION action) {
         
     }
     else if (action == BOTTOM_RIGHT) {
+
+        rotateTriplets(frontFace, leftFace, backFace, rightFace, 2);
+        faceRotateRight(bottomFace);
         
     }
     else if (action == BOTTOM_LEFT) {
+
+        rotateTriplets(frontFace, rightFace, backFace, leftFace, 2);
+        faceRotateLeft(bottomFace);
         
     }
     else if (action == FRONT_RIGHT) {
