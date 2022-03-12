@@ -71,15 +71,6 @@ Cube::~Cube() {
 
 }
 
-
-
-void Cube::initGraphics() {
-
-
-
-
-}
-
 // Takes in faces from front to left FOR Right rotation
 // Takes in faces from front to right FOR Left rotation
 void rotateTriplets(

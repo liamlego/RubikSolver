@@ -4,6 +4,8 @@
 #include "cube.h"
 #include "SFML/Graphics.hpp"
 
+enum STATE {WHITE_CROSS, F2L, YELLOW_CROSS};
+
 class Solver {
 
 public:
@@ -11,12 +13,14 @@ public:
     Solver();
     ~Solver();
 
-    void solve();
-    void display(sf::RenderWindow&);
+    void solve(Cube&);
+    ACTION getNextAction();
+    int getMove();
 
 private:
 
-    Cube cube;
+    std::vector<ACTION> currentMoveSequence;
+    int move;
 
 };
 #endif

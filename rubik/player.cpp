@@ -20,9 +20,15 @@ void RubikPlayer::play() {
 
     sf::RenderWindow window(sf::VideoMode(1000, 800), "Rubik");
 
+    bool solveIt = false;
+    bool doSequence = false;
+
+    std::chrono::milliseconds time = 100ms;
+
     while (window.isOpen()) {
 
         ACTION action = NOTHING;
+
 
         sf::Event event;
         while (window.pollEvent(event))
@@ -67,6 +73,10 @@ void RubikPlayer::play() {
                 else if (event.key.code == sf::Keyboard::I) {
                     action = ACTION::LEFT_DOWN;
                 }
+                else if (event.key.code == sf::Keyboard::Space) {
+                    action = ACTION::NOTHING;
+                    solveIt = true;
+                }
             }
         }
 
@@ -79,13 +89,31 @@ void RubikPlayer::play() {
 
         // Update cube
 
-        if (action != ACTION::NOTHING) {
+        if (action != ACTION::NOTHING && !solveIt && !doSequence) {
             cube.updateCube(action);
+        }
+        else if (solveIt) {
+            solver.solve(cube);
+            std::cout << "DONE!" << std::endl;
+            solveIt = false;
+            doSequence = true;
+            time = 1000ms;
+            std::cout << "STARTING SEQUENCE!" << std::endl;
+        }
+        else if (doSequence) {
+            
+            if (solver.getMove() == -1) {
+                time = 100ms;
+                doSequence = false;
+            } else {
+                cube.updateCube(solver.getNextAction());
+            }
+
         }
         
 
         // Pause between updates
-        this_thread::sleep_for(100ms);
+        this_thread::sleep_for(time);
         
     }
 

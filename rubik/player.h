@@ -3,6 +3,7 @@
 
 #include "cube.h"
 #include "SFML/Graphics.hpp"
+#include "solver.h"
 
 
 class RubikPlayer {
@@ -18,6 +19,7 @@ public:
 private:
 
     Cube cube;
+    Solver solver;
 
 };
 #endif

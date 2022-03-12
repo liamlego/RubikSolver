@@ -13,6 +13,8 @@ BOTTOM_RIGHT, BOTTOM_LEFT,
 FRONT_RIGHT, FRONT_LEFT,
 BACK_RIGHT, BACK_LEFT, NOTHING};
 
+// 12 different rotations
+
 class Cube {
 
 public:
@@ -23,10 +25,6 @@ public:
     void updateCube(ACTION);
 
     void displayCube(sf::RenderWindow&);
-
-    void initGraphics();
-
-private:
 
 /*
 
