@@ -13,7 +13,7 @@ public:
     Solver();
     ~Solver();
 
-    void solve(Cube&);
+    void solve(Cube&, int);
     ACTION getNextAction();
     int getMove();
 

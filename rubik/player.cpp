@@ -93,7 +93,7 @@ void RubikPlayer::play() {
             cube.updateCube(action);
         }
         else if (solveIt) {
-            solver.solve(cube);
+            solver.solve(cube, 0);
             std::cout << "DONE!" << std::endl;
             solveIt = false;
             doSequence = true;

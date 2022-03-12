@@ -107,7 +107,7 @@ void printVect(std::vector<ACTION> list) {
 
 }
 
-std::vector<ACTION> getNextActions(Cube &cube) {
+std::vector<ACTION> getMinNextActions(Cube &cube) {
 
     Cube copyCube = cube;
 
@@ -128,6 +128,7 @@ std::vector<ACTION> getNextActions(Cube &cube) {
         actions.pop();
 
         if (isCubeSolved(curr.first)) {
+            printVect(curr.second);
             return curr.second;
         }
         
@@ -155,9 +156,24 @@ std::vector<ACTION> getNextActions(Cube &cube) {
     return {ACTION::NOTHING};
 }
 
-void Solver::solve(Cube &cube) {
+std::vector<ACTION> solveCFOP(Cube &cube) {
 
-    currentMoveSequence = getNextActions(cube);
+    Cube copyCube = cube;
+
+    std::vector<ACTION> cornerSequence1 = {RIGHT_UP, UP_LEFT, RIGHT_DOWN, UP_RIGHT};
+    std::vector<ACTION> cornerSequence2 = {LEFT_UP, UP_RIGHT, LEFT_DOWN, UP_LEFT};
+
+}
+
+void Solver::solve(Cube &cube, int choice) {
+
+
+    if (choice == 0) {
+        currentMoveSequence = getMinNextActions(cube);
+    } else {
+        currentMoveSequence = solveCFOP(cube);
+    }
+
     move = 0;
 
 }
